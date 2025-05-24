@@ -32,6 +32,33 @@ class LinkedList:
             last = last.next
         last.next = new_node
 
+    def deleteFromBeginning(self):
+        if self.head is None:
+            return "The List is Empty"
+        self.head = self.head.next
+
+    def deleteFromEnd(self):
+        if self.head is None:
+            return "List is Empty"
+        if self.head.next is None:
+            self.head = None
+            return
+        temp = self.head
+        while temp.next.next:
+            temp = temp.next
+        temp.next = None
+
+    def search(self, value):
+
+        current = self.head
+        position = 0
+        while current:
+            if current.data == value:
+                return f"Value '{value}' found at position {position}"
+            current = current.next
+            position += 1
+        return f"Value '{value}' not found in the list"
+
 
 if __name__ == "__main__":
     llist = LinkedList()
@@ -41,7 +68,11 @@ if __name__ == "__main__":
     llist.insertAtTheBeginning("Quick")
     llist.insertAtTheBeginning("The")
 
-    #llist.printLinkedList()
+    llist.printLinkedList()
+
+    llist.deleteFromBeginning()
+    print("\nList after deletion: ")
+    llist.printLinkedList()
 
     llist.insertAtTheEnd("Jumps")
     #llist.printLinkedList()
@@ -50,3 +81,6 @@ if __name__ == "__main__":
     llist.insertAtTheEnd("Lazy")
     llist.insertAtTheEnd("Dog")
     llist.printLinkedList()
+    print("\n")
+    print(llist.search('Quick'))
+    print(llist.search('Lazy'))
